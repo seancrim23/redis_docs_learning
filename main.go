@@ -97,4 +97,11 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(sMembsResult) // should print all set members
+	rdb.HSet(ctx, "foo:bar:hash:example", "name", "joe", "color", "blue", "quantity", 20)
+	hGetResult, err := rdb.HGet(ctx, "foo:bar:hash:example", "name").Result() //name field from hash
+	//you can also do hgetall to get everything from a hash
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(hGetResult)
 }
